@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.tsmc.plugin.template.sample.wab</groupId>
+	<artifactId>A4-Cookies-wab</artifactId>
+	<version>0.2.0</version>
+	<packaging>bundle</packaging>
+	<name>A4-Cookies-wab</name>
+  
+    <build>
+		<plugins>
+
+	      <plugin>
+	        <groupId>org.apache.felix</groupId>
+	        <artifactId>maven-bundle-plugin</artifactId>
+            <version>2.5.0</version>
+            <extensions>true</extensions>
+            <configuration>
+                <instructions>
+                	<!-- WAB must set Web-ContextPath -->
+                    <Export-Package/>
+                    <Import-Package>*</Import-Package>
+                    <_wab>src/main/webapp</_wab>
+                    <Web-ContextPath>/test</Web-ContextPath>
+                </instructions>
+            </configuration>
+	      </plugin>
+	      
+		</plugins>	
+	</build>
+
+  <dependencies>
+  
+	<!-- import servlet-api bundle -->
+   	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>2.5</version>
+	</dependency>
+    
+  </dependencies>
+</project>
