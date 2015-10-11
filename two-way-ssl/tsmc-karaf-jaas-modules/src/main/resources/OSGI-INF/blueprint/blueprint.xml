@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:jaas="http://karaf.apache.org/xmlns/jaas/v1.0.0"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0">
+
+    <type-converters>
+        <bean class="org.apache.karaf.jaas.modules.properties.PropertiesConverter"/>
+    </type-converters>
+
+    <!-- Allow usage of System properties, especially the karaf.base property -->
+    <ext:property-placeholder placeholder-prefix="${" placeholder-suffix="}"/>
+
+    <!-- AdminConfig property place holder for the org.apache.karaf.jaas  -->
+    <!-- cm:property-placeholder persistent-id="org.apache.karaf.jaas" update-strategy="reload">
+        <cm:default-properties>
+            <cm:property name="detailed.login.exception" value="false"/>
+            <cm:property name="encryption.name" value=""/>
+            <cm:property name="encryption.enabled" value="false"/>
+            <cm:property name="encryption.prefix" value="{CRYPT}"/>
+            <cm:property name="encryption.suffix" value="{CRYPT}"/>
+            <cm:property name="encryption.algorithm" value="MD5"/>
+            <cm:property name="encryption.encoding" value="hexadecimal"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
+
+    <jaas:config name="karaf">
+        <jaas:module className="org.apache.karaf.jaas.modules.properties.PropertiesLoginModule" flags="sufficient">
+            users = $[karaf.etc]/users.properties
+            detailed.login.exception = ${detailed.login.exception}
+            encryption.name = ${encryption.name}
+            encryption.enabled = ${encryption.enabled}
+            encryption.prefix = ${encryption.prefix}
+            encryption.suffix = ${encryption.suffix}
+            encryption.algorithm = ${encryption.algorithm}
+            encryption.encoding = ${encryption.encoding}
+        </jaas:module>
+        <jaas:module className="org.apache.karaf.jaas.modules.publickey.PublickeyLoginModule" flags="sufficient">
+            users = $[karaf.etc]/keys.properties
+            detailed.login.exception = ${detailed.login.exception}
+        </jaas:module>
+    </jaas:config-->
+
+    <!-- jaas:config name="policy-security-cert" rank="1">
+        <jaas:module className="org.switchyard.security.login.CertificateLoginModule" flags="required">
+            keyStoreLocation = ${karaf.home}/quickstarts/demos/policy-security-cert/users.jks
+            keyStorePassword = changeit
+            rolesProperties = ${karaf.home}/quickstarts/demos/policy-security-cert/roles.properties
+        </jaas:module>
+    </jaas:config-->
+
+	<!-- jaas:config name="policy-security-cert" rank="1">
+	    <jaas:module className="org.apache.karaf.jaas.modules.ldap.LDAPLoginModule" flags="required">
+	        ssl=true
+	        ssl.protocol=SSL
+	        ssl.keystore=a4ks
+	        ssl.truststore=a4trustks
+	        ssl.algorithm=PKIX
+	    </jaas:module>
+	</jaas:config>
+	
+	<jaas:keystore name="a4ks" path="file:///${karaf.home}/etc/certs/a4.jks" keystorePassword="12345678" />
+	<jaas:keystore name="a4trustks" path="file:///${karaf.home}/etc/certs/a4trust.jks" keystorePassword="12345678" /-->
+
+    <jaas:config name="policy-security-cert2" rank="1">
+        <jaas:module className="org.switchyard.security.login.CertificateLoginModule" flags="required">
+            keyStoreLocation = ${karaf.home}/etc/certs/a4.jks
+            keyStorePassword = 12345678
+            rolesProperties = ${karaf.home}/etc/certs/roles.properties
+        </jaas:module>
+    </jaas:config>
+
+</blueprint>
