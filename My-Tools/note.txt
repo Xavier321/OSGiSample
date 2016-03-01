@@ -1,0 +1,9 @@
+FileArrg
+預設 gen 出來為 MS950 = ANSI
+如果是 UTF-8 code gen 出來會是亂碼
+但只要用 Notepad++ 轉就好
+再進行加密就可以摟
+
+FileRecover
+第一行不能會空行
+最後要兩行以上空行
